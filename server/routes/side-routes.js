@@ -1,33 +1,32 @@
-var Burgers = require('../models/burger')
+var Sides = require('../models/side')
 var router = require('express').Router()
 
-
-router.get('/api/burgers', (req, res, next) => {
-    Burgers.find({})
-        .then(burgers => {
-            res.send(burgers)
+router.get('/api/sides', (req, res, next) => {
+    Sides.find({})
+        .then(sides => {
+            res.send(sides)
         })
         .catch(err => {
             res.status(400).send({ Error: err })
         })
 })
 
-router.get('/api/burgers/:id', (req, res, next) => {
-    Burgers.findById(req.params.id)
-        .then(burger => {
-            res.send(burger)
+router.get('/api/sides/:id', (req, res, next) => {
+    Sides.findById(req.params.id)
+        .then(side => {
+            res.send(side)
         })
         .catch(err => {
             res.status(400).send({ Error: err })
         })
 })
 
-router.post('/api/burgers', (req, res, next) => {
-    Burgers.create(req.body)
-        .then(burger => {
+router.post('/api/sides', (req, res, next) => {
+    Sides.create(req.body)
+        .then(side => {
             let response = {
-                data: burger,
-                message: 'Successfully created Burger!'
+                data: side,
+                message: 'Successfully created Side!'
             }
             res.send(response)
         })
@@ -36,10 +35,9 @@ router.post('/api/burgers', (req, res, next) => {
         })
 })
 
-
-router.put('/api/burgers/:id', (req, res, next) => {
-    var action = 'Update Burger'
-    Burgers.findByIdAndUpdate(req.params.id, req.body)
+router.put('/api/sides/:id', (req, res, next) => {
+    var action = "Update Side"
+    Sides.findByIdAndUpdate(req.params.id, req.body)
         .then(data => {
             res.send(handleResponse(action, data))
         })
@@ -48,11 +46,10 @@ router.put('/api/burgers/:id', (req, res, next) => {
         })
 })
 
-
-router.delete('/api/burgers/:id', (req, res, next) => {
-    Burgers.findByIdAndRemove(req.params.id)
+router.delete('/api/sides/:id', (req, res, next) => {
+    Sides.findByIdAndRemove(req.params.id)
         .then(() => {
-            res.send({ message: 'Successfully deleted burger' })
+            res.send({ message: "Successfully deleted Side" })
         })
         .catch(err => {
             res.status(400).send({ Error: err })
